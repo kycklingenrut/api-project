@@ -39,6 +39,23 @@ app.post("/api/account", (request, response) => {
   response.json(result);
 });
 
+// /api/order/:id 	GET 	Get specific order/orderhistory later
+// app.get("/api/order/:id", (request, response) => {
+//   const orderDetails = request.params.id;
+//   console.log("Order details:", orderDetails);
+
+//   const allOrders = database.get("order").write();
+
+//   let result = {};
+//   if (allOrders.length > 0) {
+//     result.success = true;
+//   } else {
+//     result.success = false;
+//     result.message = "This order doesn't exist yet";
+//   }
+
+//   response.json(result);
+// });
 app.listen(8000, () => {
   console.log("server started");
   initiateDatabase();

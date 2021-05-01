@@ -1,6 +1,7 @@
 const lowdb = require("lowdb");
 const express = require("express");
 const FileSync = require("lowdb/adapters/FileSync");
+const { nanoid } = require('nanoid');
 const adapter = new FileSync("menu.json");
 const database = lowdb(adapter);
 
@@ -12,14 +13,24 @@ function initiateDatabase() {
 }
 // To return a coffee menu
  app.get('/api/coffee', (req, res) => {
-  const menu = require('./menu.json');
+  let menu = database.get('menu').value();
   res.json(menu);
 });
 
 // To add orders
+ app.post('/api/order', (req, res) => {
+    const menuItem = req.body;
+  menuItem.id = nanoid();
+   database.get('menu').push(menuItem).write();
+   res.json({ "status":"successfully added"})   
+ });
 
-
-
+// To delete orders
+//  app.delete('/api/:id', (req, res) => {  
+//   const menuItem = req.params.id;
+//   database.get('menu').remove({ id: menuItem }).write();
+//    res.json({ "status":"successfully deleted"})   
+// });
 
 app.listen(8000, () => {
   console.log("server started");

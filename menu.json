@@ -36,5 +36,11 @@
       "desc": "Bryggd på månadens bönor.",
       "price": 39
     }
+  ],
+  "account": [
+    {
+      "username": "noelas",
+      "password": "3213"
+    }
   ]
 }

@@ -1,6 +1,7 @@
 const lowdb = require("lowdb");
 const express = require("express");
 const FileSync = require("lowdb/adapters/FileSync");
+const { nanoid } = require("nanoid");
 
 const adapter = new FileSync("menu.json");
 const database = lowdb(adapter);
@@ -9,16 +10,17 @@ const app = express();
 app.use(express.json());
 
 function initiateDatabase() {
-  database.defaults({ menu: [] }, { account: [] }).write();
+  database.defaults({ menu: [] }, { orders: [] }, { accounts: [] }).write();
 }
 
-// /api/account 	POST 	Skapar ett användarkonto
-app.post("/api/account", (request, response) => {
-  const account = request.body;
-  console.log("Konto att lägga till", account);
+// Creating a user-account
+app.post("/api/account", (req, res) => {
+  const account = req.body;
+  console.log("Account to add", account);
 
+  // Checking if the username already exists
   const userNameExists = database
-    .get("account")
+    .get("accounts")
     .find({ username: account.username })
     .value();
 
@@ -32,30 +34,39 @@ app.post("/api/account", (request, response) => {
   if (userNameExists) {
     result.userNameExists = true;
   }
+  // If username doesnt exist, write account-details to DB
+  // and append a random ID with 10 characters
   if (!result.userNameExists) {
-    database.get("account").push(account).write();
+    database
+      .get("accounts")
+      .push({
+        userId: nanoid(10),
+        username: account.username,
+        password: account.password,
+      })
+      .write();
     result.success = true;
   }
-  response.json(result);
+  res.json(result);
 });
 
-// /api/order/:id 	GET 	Get specific order/orderhistory later
-// app.get("/api/order/:id", (request, response) => {
-//   const orderDetails = request.params.id;
-//   console.log("Order details:", orderDetails);
+//Get specific order/orderhistory later
+app.get("/api/order/:id", (req, res) => {
+  const orderDetails = req.params.id;
+  console.log("Order details:", orderDetails);
 
-//   const allOrders = database.get("order").write();
+  const allOrders = database.get("order").value();
 
-//   let result = {};
-//   if (allOrders.length > 0) {
-//     result.success = true;
-//   } else {
-//     result.success = false;
-//     result.message = "This order doesn't exist yet";
-//   }
+  let result = {};
+  if (allOrders.length > 0) {
+    result.success = true;
+  } else {
+    result.success = false;
+    result.message = "This order doesn't exist yet";
+  }
 
-//   response.json(result);
-// });
+  res.json(result);
+});
 app.listen(8000, () => {
   console.log("server started");
   initiateDatabase();

@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 function initiateDatabase() {
-  database.defaults({ menu: [] }).write();
+  database.defaults({ menu: [] }, { orders: [] } ).write();
 }
 // To return a coffee menu
  app.get('/api/coffee', (req, res) => {
@@ -21,7 +21,7 @@ function initiateDatabase() {
  app.post('/api/order', (req, res) => {
     const menuItem = req.body;
   menuItem.id = nanoid();
-   database.get('menu').push(menuItem).write();
+   database.get('orders').push(menuItem).write();
    res.json({ "status":"successfully added"})   
  });
 

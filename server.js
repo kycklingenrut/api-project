@@ -13,6 +13,12 @@ function initiateDatabase() {
   database.defaults({ menu: [] }, { orders: [] }, { accounts: [] }).write();
 }
 
+// To return a coffee menu
+app.get("/api/coffee", (req, res) => {
+  let menu = database.get("menu").value();
+  res.json(menu);
+});
+
 // To add orders
 app.post("/api/order", (req, res) => {
   const menuItem = req.body;
@@ -22,26 +28,21 @@ app.post("/api/order", (req, res) => {
     .find({ title: menuItem.title })
     .value();
   console.log(coffeeItem);
-  const userStatus = database
-    .get("accounts")
-    .find({ userId: menuItem.id })
-    .value();
 
   const result = {
     success: false,
     menuItem: false,
-    userStatus: false,
   };
-  if (!result.coffeeItem || !result.userStatus) {
+  if (!result.coffeeItem) {
     result.success = false;
-    result.message =
-      "The item doesn't exist in the menu or you got the wrong account";
+    result.message = "The item doesn't exist in the menu";
   }
-  if (coffeeItem && userStatus) {
+  if (coffeeItem) {
     result.success = true;
+    result.message = "Succesfully sent your order of coffee";
     result.menuItem = true;
-    result.userStatus = true;
-    database
+
+    order = database
       .get("orders")
       .push({
         id: coffeeItem.id,
@@ -66,7 +67,7 @@ app.post("/api/account", (req, res) => {
     .find({ username: account.username })
     .value();
 
-  console.log("usernameExits:", userNameExists);
+  console.log("usernameExists:", userNameExists);
 
   const result = {
     success: false,
@@ -75,6 +76,7 @@ app.post("/api/account", (req, res) => {
 
   if (userNameExists) {
     result.userNameExists = true;
+    result.message = "Username already exists, try another one";
   }
   // If username doesnt exist, write account-details to DB
   // and append a random ID with 10 characters
@@ -88,30 +90,33 @@ app.post("/api/account", (req, res) => {
       })
       .write();
     result.success = true;
+    result.message = "Successfully created account";
   }
   res.json(result);
 });
 
 //Get specific order/orderhistory later
 app.get("/api/order/:id", (req, res) => {
-  const orderDetails = req.params.id;
-  console.log("Order details:", orderDetails);
+  const userId = req.params.id;
+  console.log("Order details:", userId);
 
-  const allOrders = database
-    .get("orders")
-    .filter({ userId: orderDetails })
-    .value();
-  console.log(allOrders);
+  const orderExists = database.get("orders").filter({ userId: userId }).value();
+  console.log(orderExists);
 
-  let result = {};
-  if (allOrders.length > 0) {
+  const result = {
+    success: false,
+    orderExists: false,
+  };
+
+  if (orderExists.length > 0) {
     result.success = true;
+    result.orderExists = orderExists;
   } else {
     result.success = false;
     result.message = "You have not placed an order yet";
   }
 
-  res.json(allOrders);
+  res.json(result);
 });
 app.listen(8000, () => {
   console.log("server started");

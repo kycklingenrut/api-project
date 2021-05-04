@@ -2,6 +2,7 @@ const lowdb = require("lowdb");
 const express = require("express");
 const FileSync = require("lowdb/adapters/FileSync");
 const { nanoid } = require("nanoid");
+const moment = require("moment");
 
 const adapter = new FileSync("menu.json");
 const database = lowdb(adapter);
@@ -21,17 +22,22 @@ app.get("/api/coffee", (req, res) => {
 
 // To add orders
 app.post("/api/order", (req, res) => {
-  const menuItem = req.body;
+  const orderDetails = req.body;
+
+  //Code for ETA and Current Time
+  let eta = Math.floor(Math.random() * 10) + 3 + " minutes";
+  let time = moment().format("HH:mm");
+
   // menuItem.id = nanoid();
   const coffeeItem = database
     .get("menu")
-    .find({ title: menuItem.title })
+    .find({ title: orderDetails.title })
     .value();
   console.log(coffeeItem);
 
   const result = {
     success: false,
-    menuItem: false,
+    orderDetails: false,
   };
   if (!result.coffeeItem) {
     result.success = false;
@@ -39,19 +45,21 @@ app.post("/api/order", (req, res) => {
   }
   if (coffeeItem) {
     result.success = true;
-    result.message = "Succesfully sent your order of coffee";
-    result.menuItem = true;
-
+    result.message = "Successfully sent your order of coffee";
+    const orderNumber = nanoid(3);
     order = database
       .get("orders")
       .push({
         id: coffeeItem.id,
         title: coffeeItem.title,
         price: coffeeItem.price,
-        userId: menuItem.id,
-        orderNumber: nanoid(3),
+        userId: orderDetails.id,
+        orderNumber: orderNumber,
+        ETA: eta,
+        orderTime: time,
       })
       .write();
+    result.orderDetails = { orderNumber: orderNumber, ETA: eta };
   }
   res.json(result);
 });
@@ -67,7 +75,7 @@ app.post("/api/account", (req, res) => {
     .find({ username: account.username })
     .value();
 
-  console.log("usernameExists:", userNameExists);
+  console.log(userNameExists);
 
   const result = {
     success: false,
@@ -90,6 +98,7 @@ app.post("/api/account", (req, res) => {
       })
       .write();
     result.success = true;
+    result.userNameExists = account;
     result.message = "Successfully created account";
   }
   res.json(result);
@@ -118,6 +127,7 @@ app.get("/api/order/:id", (req, res) => {
 
   res.json(result);
 });
+
 app.listen(8000, () => {
   console.log("server started");
   initiateDatabase();

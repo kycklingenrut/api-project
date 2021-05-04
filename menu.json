@@ -39,17 +39,76 @@
   ],
   "orders": [
     {
-      "id": 5,
-      "title": "Kaffe Latte",
-      "price": 54,
+      "id": 2,
+      "title": "Caffè Doppio",
+      "price": 49,
       "userId": "kVTa-fThM90",
-      "orderNumber": "eOd"
+      "orderNumber": "9FD",
+      "ETA": "3 minutes",
+      "orderTime": "20:50"
+    },
+    {
+      "id": 1,
+      "title": "Bryggkaffe",
+      "price": 39,
+      "userId": "kVTa-fThM90",
+      "orderNumber": "wTr",
+      "ETA": "9 minutes",
+      "orderTime": "20:50"
+    },
+    {
+      "id": [
+        2,
+        3
+      ],
+      "title": [
+        "Caffè Doppio",
+        "Cappuccino"
+      ],
+      "price": 98,
+      "userId": "kVTa-fThM90",
+      "orderNumber": "nL_",
+      "ETA": "8 minutes",
+      "orderTime": "21:00"
+    },
+    {
+      "id": [
+        1,
+        5
+      ],
+      "title": [
+        "Bryggkaffe",
+        "Kaffe Latte"
+      ],
+      "price": 93,
+      "userId": "kVTa-fThM90",
+      "orderNumber": "_4l",
+      "ETA": "8 minutes",
+      "orderTime": "21:03"
+    },
+    {
+      "id": [
+        2
+      ],
+      "title": [
+        "Caffè Doppio"
+      ],
+      "price": 49,
+      "userId": "kVTa-fThM90",
+      "orderNumber": "h_x",
+      "ETA": "9 minutes",
+      "orderTime": "21:04"
     }
   ],
   "accounts": [
     {
       "userId": "XFGiamZQIM",
       "username": "Test",
+      "password": "Test2"
+    },
+    {
+      "id": "7ALkHm8gbZ",
+      "username": "Hej",
       "password": "Test2"
     }
   ]

@@ -1,3 +1,111 @@
 {
-  "menu": []
+  "menu": [
+    {
+      "id": 1,
+      "title": "Bryggkaffe",
+      "desc": "Bryggd på månadens bönor.",
+      "price": 39
+    },
+    {
+      "id": 2,
+      "title": "Caffè Doppio",
+      "desc": "Bryggd på månadens bönor.",
+      "price": 49
+    },
+    {
+      "id": 3,
+      "title": "Cappuccino",
+      "desc": "Bryggd på månadens bönor.",
+      "price": 49
+    },
+    {
+      "id": 4,
+      "title": "Latte Macchiato",
+      "desc": "Bryggd på månadens bönor.",
+      "price": 49
+    },
+    {
+      "id": 5,
+      "title": "Kaffe Latte",
+      "desc": "Bryggd på månadens bönor.",
+      "price": 54
+    },
+    {
+      "id": 6,
+      "title": "Cortado",
+      "desc": "Bryggd på månadens bönor.",
+      "price": 39
+    }
+  ],
+  "orders": [
+    {
+      "id": 5,
+      "title": "Kaffe Latte",
+      "price": 54,
+      "userId": "kVTa-fThM90",
+      "orderNumber": "eOd"
+    },
+    {
+      "id": 4,
+      "title": "Latte Macchiato",
+      "price": 49,
+      "userId": "kVTa-fThM9",
+      "orderNumber": "COE"
+    },
+    {
+      "id": 4,
+      "title": "Latte Macchiato",
+      "price": 49,
+      "userId": "kVTa-fThM9",
+      "orderNumber": "_r0"
+    },
+    {
+      "id": 2,
+      "title": "Caffè Doppio",
+      "price": 49,
+      "userId": "kVTa-fThM9",
+      "orderNumber": "rOh"
+    },
+    {
+      "id": 2,
+      "title": "Caffè Doppio",
+      "price": 49,
+      "userId": "kVTa-fThM9",
+      "orderNumber": "5Ti"
+    },
+    {
+      "id": 2,
+      "title": "Caffè Doppio",
+      "price": 49,
+      "userId": "kVTa-fThM9",
+      "orderNumber": "psg"
+    }
+  ],
+  "accounts": [
+    {
+      "userId": "kVTa-fThM9",
+      "username": "hallowj",
+      "password": "31213"
+    },
+    {
+      "userId": "XFGiamZQIM",
+      "username": "Test",
+      "password": "Test2"
+    },
+    {
+      "id": "ZgcQsaea6h",
+      "username": "Test1",
+      "password": "Test2"
+    },
+    {
+      "id": "Zs8TTCDzZI",
+      "username": "Test12",
+      "password": "Test2"
+    },
+    {
+      "id": "_UwuWkLHSb",
+      "username": "Test121",
+      "password": "Test2"
+    }
+  ]
 }

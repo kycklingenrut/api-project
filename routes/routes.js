@@ -24,7 +24,7 @@ router.post("/account", (req, res) => {
 });
 
 //Get specific order/orderhistory later
-router.get("/api/order/:id", (req, res) => {
+router.get("/order/:id", (req, res) => {
   const userId = req.params.id;
   res.json(getOrderHistory(userId));
 });

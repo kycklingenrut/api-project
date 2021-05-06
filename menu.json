@@ -40,46 +40,16 @@
   "orders": [
     {
       "id": [
-        2,
-        3
+        1
       ],
       "title": [
-        "Caffè Doppio",
-        "Cappuccino"
+        "Bryggkaffe"
       ],
-      "price": 98,
+      "price": 39,
       "userId": "kVTa-fThM90",
-      "orderNumber": "nL_",
-      "ETA": "8 minutes",
-      "orderTime": "21:00"
-    },
-    {
-      "id": [
-        1,
-        5
-      ],
-      "title": [
-        "Bryggkaffe",
-        "Kaffe Latte"
-      ],
-      "price": 93,
-      "userId": "kVTa-fThM90",
-      "orderNumber": "_4l",
-      "ETA": "8 minutes",
-      "orderTime": "21:03"
-    },
-    {
-      "id": [
-        2
-      ],
-      "title": [
-        "Caffè Doppio"
-      ],
-      "price": 49,
-      "userId": "kVTa-fThM90",
-      "orderNumber": "h_x",
-      "ETA": "9 minutes",
-      "orderTime": "21:04"
+      "orderNumber": "Tgl",
+      "ETA": "2021-05-06 18:04:21",
+      "orderTime": "17:58"
     }
   ],
   "accounts": [

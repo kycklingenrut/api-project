@@ -17,7 +17,9 @@ function getMenu() {
 
 function postOrder(orderDetails) {
   //Code for ETA and Current Time
-  let eta = Math.floor(Math.random() * 10) + 3 + " minutes";
+  let eta = moment()
+    .add(Math.floor(Math.random() * (10 - 5 + 1)) + 3, "m")
+    .format("YYYY-MM-DD HH:mm:ss");
   let time = moment().format("HH:mm");
 
   //Code for ordering one/multiple coffee through array
@@ -93,16 +95,26 @@ function addAccount(account) {
 }
 
 function getOrderHistory(userId) {
-  const orderExists = database.get("orders").filter({ userId: userId }).value();
+  const order = database.get("orders").filter({ userId: userId }).value();
+  let fullOrder = [];
 
+  order.forEach((element) => {
+    if (moment() > moment(element.ETA)) {
+      element.status = "Delivered ";
+    }
+    if (moment() < moment(element.ETA)) {
+      element.status = "Coffee coming up";
+    }
+    fullOrder.push(element);
+  });
   const result = {
     success: false,
-    orderExists: false,
+    order: false,
   };
 
-  if (orderExists.length > 0) {
+  if (order.length > 0) {
     result.success = true;
-    result.orderExists = orderExists;
+    result.order = order;
   } else {
     result.success = false;
     result.message = "You have not placed an order yet";

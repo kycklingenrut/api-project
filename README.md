@@ -4,7 +4,7 @@
 
 #### To add Account, POST + /api/account {"username": xx, "password": xy, "email": xyz}
 
-#### To Log in, POST + /api/account {"username": xx, "password": xx}
+#### To Log in, POST + /api/login {"username": xx, "password": xx}
 
 #### To add Order, POST + /api/order {"userId": xx, "id": [x, y]}
 

@@ -50,6 +50,19 @@
       "orderNumber": "Tgl",
       "ETA": "2021-05-06 18:04:21",
       "orderTime": "17:58"
+    },
+    {
+      "id": [
+        1
+      ],
+      "title": [
+        "Bryggkaffe"
+      ],
+      "price": 39,
+      "userId": "kVTa-fThM90",
+      "orderNumber": "RYF",
+      "ETA": "2021-06-11 10:51:37",
+      "orderTime": "10:48"
     }
   ],
   "accounts": [
@@ -67,6 +80,12 @@
       "id": "sbTKPgTN4e",
       "username": "Hej1",
       "password": "Test2"
+    },
+    {
+      "id": "LcDAiQR6tE",
+      "username": "Hej12",
+      "password": "Test1",
+      "email": "email@email.com"
     }
   ]
 }

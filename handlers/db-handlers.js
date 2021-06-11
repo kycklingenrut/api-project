@@ -85,11 +85,36 @@ function addAccount(account) {
         id: nanoid(10),
         username: account.username,
         password: account.password,
+        email: account.email,
       })
       .write();
     result.success = true;
     result.userNameExists = account;
     result.message = "Successfully created account";
+  }
+  return result;
+}
+
+function login(account) {
+  let result = {};
+  const userNameExists = database
+    .get("accounts")
+    .find({ username: account.username })
+    .value();
+
+  if (
+    userNameExists &&
+    account.username === userNameExists.username &&
+    account.password === userNameExists.password
+  ) {
+    result = {
+      loggedIn: true,
+      username: userNameExists.username,
+      password: userNameExists.password,
+      id: userNameExists.id,
+    };
+  } else {
+    result = { loggedIn: false };
   }
   return result;
 }
@@ -126,3 +151,4 @@ exports.getMenu = getMenu;
 exports.postOrder = postOrder;
 exports.addAccount = addAccount;
 exports.getOrderHistory = getOrderHistory;
+exports.login = login;
